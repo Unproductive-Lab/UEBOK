@@ -76,7 +76,7 @@ goto menu
 
 :proping
 set /p cc=Введи адрес для пропинга (192.168.0.1) :
-ping %cc%
+ping -t %cc%
 pause
 
 goto menu
