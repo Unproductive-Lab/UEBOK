@@ -144,6 +144,7 @@ goto menu
 :mri
 cls
 mrt
+pause
 goto menu
 
 :proping
