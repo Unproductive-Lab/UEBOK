@@ -62,7 +62,7 @@ echo [3] Открыть hosts
 echo [4] Пропинговать
 echo [5] Ехит
 echo ##################################################
-
+::test
 set /p c=Выбери команду (1-5):
 if "%c%" == "1" goto aisserverhosts
 if "%c%" == "2" goto custom_domain
