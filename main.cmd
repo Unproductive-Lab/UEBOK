@@ -32,6 +32,7 @@ echo включи скрипт с админ правами
 :: Жёстко. Разъёб.
 :menu
 color 2
+mode con: cols=100 lines=30
 title UEBOKv0.1 WINDOWS
 cls
 echo:
@@ -60,17 +61,27 @@ echo [1] Пробросить сервер EISSCHOOL
 echo [2] Записать кастомный домен
 echo [3] Открыть hosts
 echo [4] Пропинговать
-echo [5] Ехит
+echo [5] Конфигурация сети
+echo [E] Ехит
 echo ##################################################
 ::test
-set /p c=Выбери команду (1-5):
+set /p c=Выбери команду (1-5,e):
 if "%c%" == "1" goto aisserverhosts
 if "%c%" == "2" goto custom_domain
 if "%c%" == "3" goto OPEN_HOSTS
 if "%c%" == "4" goto proping
-if "%c%" == "5" goto exit
+if "%c%" == "5" goto ifcfg
+if "%c%" == "e" (goto exit
+)else goto MENU
 
 echo:
+pause
+goto menu
+
+:ifcfg
+cls
+mode con: cols=100 lines=90
+ipconfig
 pause
 goto menu
 
@@ -123,7 +134,6 @@ GOTO MENU
 :OPEN_HOSTS
 echo Окей, открываем...
 START "" "%SystemRoot%\System32\notepad.exe" "%HOSTS_FILE%"
-PAUSE
 GOTO MENU
 
 
