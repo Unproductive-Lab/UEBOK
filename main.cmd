@@ -62,19 +62,75 @@ echo [2] Записать кастомный домен
 echo [3] Открыть hosts
 echo [4] Пропинговать
 echo [5] Конфигурация сети
+echo [6] МРТ
+echo [7] Производительность
+echo [8] netstat
 echo [E] Ехит
 echo ##################################################
 ::test
-set /p c=Выбери команду (1-5,e):
+set /p c=Выбери команду (1-8,e):
 if "%c%" == "1" goto aisserverhosts
 if "%c%" == "2" goto custom_domain
 if "%c%" == "3" goto OPEN_HOSTS
 if "%c%" == "4" goto proping
 if "%c%" == "5" goto ifcfg
+if "%c%" == "6" goto mri
+if "%c%" == "7" goto pwrmngr
+if "%c%" == "8" goto ntstat
+if "%c%" == "у" goto exit
 if "%c%" == "e" (goto exit
 )else goto MENU
 
 echo:
+pause
+goto menu
+
+:ntstat
+cls
+netstat
+goto menu
+
+:pwrmngr
+cls
+echo:
+echo:
+echo ##################################################
+echo [1] Проверка драйверов
+echo [2] Целостность файлов
+echo [3] Отчёт энергопотребления
+echo [4] Отчёт о процессах, удерживающих сон ПК
+echo [E] Назад
+echo ##################################################
+set /p ca=Выбери команду (1-4,e):
+if "%ca%" == "1" goto dr
+if "%ca%" == "2" goto sf
+if "%ca%" == "3" goto ene
+if "%ca%" == "4" goto req
+if "%ca%" == "у" goto menu
+if "%ca%" == "e" (goto menu
+)else goto pwrmngr
+
+:req
+cls
+powercfg /requests
+pause
+goto menu
+
+
+:ene
+cls
+powercfg /energy
+pause
+goto menu
+
+:dr
+cls
+verifier
+goto menu
+
+:sf
+cls
+sfc /scannow
 pause
 goto menu
 
@@ -83,6 +139,11 @@ cls
 mode con: cols=100 lines=90
 ipconfig
 pause
+goto menu
+
+:mri
+cls
+mrt
 goto menu
 
 :proping
@@ -138,7 +199,7 @@ GOTO MENU
 
 
 :EXIT
-ECHO Exit...
+ECHO Пока-пока...
 ENDLOCAL
 EXIT
 
