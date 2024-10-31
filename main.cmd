@@ -3,11 +3,7 @@ chcp 65001
 setlocal enabledelayedexpansion
 ::фикс для и от Сани
 SET HOSTS_FILE=%WINDIR%\System32\drivers\etc\hosts 
-set NLM=^
 
-
-
-set NL=^^^%NLM%%NLM%^%NLM%%NLM%
 
 :: GREEN FN REFERENCE?!?!?!?!??!??!?!?!??
 net session >nul 2>&1
@@ -42,7 +38,7 @@ echo включи скрипт с админ правами
 :menu
 color 2
 mode con: cols=100 lines=30
-title UEBOKv0.1 WINDOWS
+title UEBOKv0.2 WINDOWS
 cls
 echo:
 echo:
