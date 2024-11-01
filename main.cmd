@@ -187,13 +187,10 @@ SET  IP_ADDRESS=10.69.180.230:5000
 SET  DOMAIN_NAME=eisschool41.sc41
 FINDSTR /C:"%DOMAIN_NAME%" "%HOSTS_FILE%" > NUL
 IF %ERRORLEVEL% NEQ 0 (
+    echo: >> "%HOSTS_FILE%"
     ECHO %IP_ADDRESS% %DOMAIN_NAME% >> "%HOSTS_FILE%"
-    color e
+    color 4
     ECHO Успех средней успешности. Проверьте файл hosts. 
-
-    set /p sc=Открыть его? y n :
-    if "%sc%" == "y" goto OPEN_HOSTS
-
 ) ELSE (
     ECHO Успешный Успех. Теперь есть доступ к "%DOMAIN_NAME%".
 )
