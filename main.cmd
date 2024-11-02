@@ -59,14 +59,15 @@ echo [1m[38;2;12;190;0m                ｼ       Ультимативный Э
 
 ::╚═╦═════»
 echo ————————————————————————————————————————————————————————————————————————————————————————————————————
-echo [1m[38;2;12;0;0m════[1m[38;2;12;10;0m═[1m[38;2;12;20;0m═[1m[38;2;12;30;0m═[1m[38;2;12;40;0m═[1m[38;2;12;50;0m═[1m[38;2;12;60;0m═[1m[38;2;12;70;0m═[1m[38;2;12;80;0m═[1m[38;2;12;90;0m═[1m[38;2;12;100;0m═[1m[38;2;12;110;0m═[1m[38;2;12;120;0m═[1m[38;2;12;130;0m═[1m[38;2;12;140;0m═[1m[38;2;12;150;0m═[1m[38;2;12;160;0m═[1m[38;2;12;170;0m═══╦══════════» [38;2;12;255;0m[1] Пробросить сервер EISSCHOOL [0m  
-echo                        ╚╦═════════» [38;2;12;255;0m[2] Записать кастомный домен [0m  
-echo                         ╚╦════════» [38;2;12;255;0m[3] Открыть hosts [0m  
-echo                          ╚╦═══════» [38;2;12;255;0m[4] Пропинговать [0m  
-echo                           ╚╦══════» [38;2;12;255;0m[5] Конфигурация сети [0m  
-echo                            ╚╦═════» [38;2;12;255;0m[6] МРТ [0m  
-echo                             ╚╦════» [38;2;12;255;0m[7] Производительность [0m  
-echo                              ╚╦═══» [38;2;12;255;0m[8] netstat [0m  
+echo [1m[38;2;12;0;0m════[1m[38;2;12;10;0m═[1m[38;2;12;20;0m═[1m[38;2;12;30;0m═[1m[38;2;12;40;0m═[1m[38;2;12;50;0m═[1m[38;2;12;60;0m═[1m[38;2;12;70;0m═[1m[38;2;12;80;0m═[1m[38;2;12;90;0m═[1m[38;2;12;100;0m═[1m[38;2;12;110;0m═[1m[38;2;12;120;0m═[1m[38;2;12;130;0m═[1m[38;2;12;140;0m═[1m[38;2;12;150;0m═[1m[38;2;12;160;0m═[1m[38;2;12;170;0m══╦═══════════» [38;2;12;255;0m[1] Пробросить сервер EISSCHOOL [0m  
+echo                       ╚╦══════════» [38;2;12;255;0m[2] Записать кастомный домен [0m  
+echo                        ╚╦═════════» [38;2;12;255;0m[3] Открыть hosts [0m  
+echo                         ╚╦════════» [38;2;12;255;0m[4] Пропинговать [0m  
+echo                          ╚╦═══════» [38;2;12;255;0m[5] Конфигурация сети [0m  
+echo                           ╚╦══════» [38;2;12;255;0m[6] МРТ [0m  
+echo                            ╚╦═════» [38;2;12;255;0m[7] Производительность [0m  
+echo                             ╚╦════» [38;2;12;255;0m[8] netstat [0m  
+echo                              ╚╦═══» [38;2;12;255;0m[9] Удалённый доступ [0m  
 echo                               ╚═══» [38;2;12;255;0m[E] Ехит [0m  
 echo ————————————————————————————————————————————————————————————————————————————————————————————————————
 ::невидимый символ, осторожнее, не удали
@@ -80,6 +81,7 @@ if "%c%" == "5" goto ifcfg
 if "%c%" == "6" goto mri
 if "%c%" == "7" goto pwrmngr
 if "%c%" == "8" goto ntstat
+if "%c%" == "9" goto remote
 if "%c%" == "у" goto exit
 if "%c%" == "e" (goto exit
 )else goto MENU
@@ -202,6 +204,84 @@ ping -t %cc%
 
 
 goto menu
+
+:authdelforreal
+del credentials.dat
+cmdkey /delete:%host% >nul
+echo ㅤ[91m          Удалил ваше дерьмо, Сэр![0m 
+pause
+goto remote
+
+:authdel
+cls
+echo [91m          Вы уверены что хотите удалить данные для входа?  [0m 
+set /p accept=ㅤ        Введите "Да, удали моё дерьмо" : 
+if "%accept%" == "Да, удали моё дерьмо" goto authdelforreal
+goto remote
+
+:remoteactuallyhappens
+(
+  Set /p cred_1=
+  Set /p cred_2=
+  Set /p cred_3=
+) <credentials.dat
+cmdkey /add:%cred_1% /user:%cred_2% /pass:%cred_3% >nul
+mstsc /v:%cred_1%
+goto remote
+
+
+:authshow
+(
+  Set /p cred_1=
+  Set /p cred_2=
+  Set /p cred_3=
+) <credentials.dat
+echo %cred_1%
+echo %cred_2%
+echo %cred_3%
+pause
+goto remote
+
+:remoteauth
+set /p cred_1=ㅤ                                Адрес хоста : 
+set /p cred_2=ㅤ                                Имя юзера : 
+set /p cred_3=ㅤ                                Пароль юзера : 
+del credentials.dat
+echo %cred_1% >> credentials.dat 
+echo %cred_2% >> credentials.dat
+echo %cred_3% >> credentials.dat
+:remote
+cls
+echo:
+echo:    
+echo:                                                                    
+echo             .sSSSsSS SSsSSSSS .sSSSSSSSs. .sSSSSSSSSSSSSSs. .sSSSSSSSs. .sSSSSs.    
+echo             S SSS  SSS  SSSSS S SSS SSSS' SSSSS S SSS SSSSS S SSS SSSS' S SSSSSSSs. 
+echo             S  SS   S   SSSSS S  SS       SSSSS S  SS SSSSS S  SS       S  SS SSSS' 
+echo             S..SS       SSSSS `SSSSsSSSa. `:S:' S..SS `:S:' `SSSSsSSSa. S..SS       
+echo             S:::S       SSSSS .sSSS SSSSS       S:::S       .sSSS SSSSS S:::S SSSSS 
+echo             S;;;S       SSSSS S;;;S SSSSS       S;;;S       S;;;S SSSSS S;;;S SSSSS 
+echo             SSSSS       SSSSS SSSSS SSSSS       SSSSS       SSSSS SSSSS SSSSS SSSSS 
+echo             SSSSS       SSSSS SSSSSsSSSSS       SSSSS       SSSSSsSSSSS SSSSSsSSSSS 
+echo:                                                                                                                                                                      
+echo:
+echo ————————————————————————————————————————————————————————————————————————————————————————————————————
+echo [1m[38;2;12;0;0m════[1m[38;2;12;10;0m═[1m[38;2;12;20;0m═[1m[38;2;12;30;0m═[1m[38;2;12;40;0m═[1m[38;2;12;50;0m═[1m[38;2;12;60;0m═[1m[38;2;12;70;0m═[1m[38;2;12;80;0m═[1m[38;2;12;90;0m═[1m[38;2;12;100;0m═[1m[38;2;12;110;0m═[1m[38;2;12;120;0m═[1m[38;2;12;130;0m═[1m[38;2;12;140;0m═[1m[38;2;12;150;0m═[1m[38;2;12;160;0m═[1m[38;2;12;170;0m═══╦══════════» [38;2;12;255;0m[1] Подключение [0m   
+echo                        ╚╦═════════» [38;2;12;255;0m[2] Заполнить данные [0m  
+echo                         ╚╦════════» [38;2;12;255;0m[3] Вывод данных [0m  
+echo                          ╚╦═══════» [38;2;12;255;0m[Е] Назад [0m
+echo                           ╚═══════» [38;2;12;255;0m[D] Удалить данные [0m  
+echo ————————————————————————————————————————————————————————————————————————————————————————————————————
+
+set /p cb=ㅤ                                Выбери команду (1-3,e):
+if "%cb%" == "e" goto menu
+if "%cb%" == "у" goto menu
+if "%cb%" == "2" goto remoteauth
+if "%cb%" == "d" goto authdel
+if "%cb%" == "в" goto authdel
+if "%cb%" == "3" goto authshow
+if "%cb%" == "1" goto remoteactuallyhappens
+
 
 :: Спасибо @EstviAL, легенде российского кода, отцу ебанутых идей
 :AISSERVERHOSTS
